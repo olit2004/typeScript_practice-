@@ -1,8 +1,12 @@
 {
-    "name": " frans",
-    "age": 20
-}
-{
-    "name": " olit ",
-    "age": 21
+    "users": [
+        {
+            "name": "olit ",
+            "age": 21
+        },
+        {
+            "name": "guda ",
+            "age": 22
+        }
+    ]
 }
