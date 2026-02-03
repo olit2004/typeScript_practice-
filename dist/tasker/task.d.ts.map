@@ -1,0 +1,1 @@
+{"version":3,"file":"task.d.ts","sourceRoot":"","sources":["../../src/tasker/task.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,IAAI;IACjB,EAAE,EAAE,MAAM,CAAA;IACV,KAAK,EAAE,MAAM,CAAA;IACb,WAAW,EAAE,MAAM,CAAA;IACnB,MAAM,EAAE,MAAM,CAAA;CAEjB"}
