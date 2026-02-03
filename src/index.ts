@@ -1,4 +1,9 @@
+import { resolve, type promises } from "node:dns";
 import readline from "node:readline";
+import fs from  'fs'
+
+
+const outputFilePath: string = 'user_data.json';
 
 // TypeScript infers that this is readline.Interface
 const rl = readline.createInterface({
@@ -6,20 +11,31 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-// We can explicitly type 'answer' as a string, though TS usually infers this too
-rl.question("What is your name? ", async (answer: string) => {
-  console.log(`Hello, ${answer}!`);
+// function to ask question 
 
-  rl.question("what are you going to do today are you going to  fuck (yes/no) ",(secondanswer:string)=>{
-     if (secondanswer.toLowerCase()=== "yes"){
-        console.log("Good for you my man have fun i can't afford to do such things")
+interface UserData {
+  name:string
+  age:number 
+  
+}
 
-     }else{
-           console.log("poor you ")
 
-     }
-       rl.close();
 
-  })
 
-});
+function ask (question:string):Promise<string>{
+  return new Promise((resolve)=>rl.question(question,resolve))
+}
+async function main (){
+    const userData:UserData={
+      name: await ask("what is your name"),
+      age:parseInt(await ask ("what is your age "))
+    }
+    console.log(userData)
+    rl.close()
+    fs.appendFile(outputFilePath, JSON.stringify(userData, null, 4) + "\n", "utf8", () => {
+      console.log("user data appended");
+    });
+
+}
+
+main()
