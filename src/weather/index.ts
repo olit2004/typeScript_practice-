@@ -1,33 +1,57 @@
-import readline from "readline";
-import fetch from "node-fetch"; // install with: npm install node-fetch
+import dotenv from "dotenv";
+import { z } from "zod";
 
+dotenv.config();
 
-const API_KEY = "YOUR_API_KEY";
+const city = "London";
+const APIKey = process.env.APIKEY;
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+const WeatherSchema = z.object({
+  coord: z.object({ lon: z.number(), lat: z.number() }),
+  weather: z.array(
+    z.object({
+      id: z.number(),
+      main: z.string(),
+      description: z.string(),
+      icon: z.string(),
+    })
+  ),
+  main: z.object({
+    temp: z.number(),
+    feels_like: z.number(),
+    temp_min: z.number(),
+    temp_max: z.number(),
+    pressure: z.number(),
+    humidity: z.number(),
+  }),
+  wind: z.object({ speed: z.number(), deg: z.number() }),
+  clouds: z.object({ all: z.number() }),
+  name: z.string(),
+  cod: z.number(),
 });
 
-rl.question("Enter a city name: ", async (city) => {
+type WeatherResponse = z.infer<typeof WeatherSchema>;
+
+const getCityWeather = async (city: string) => {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`;
+
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-      city
-    )}&appid=${API_KEY}&units=metric`;
-
     const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Error fetching weather: ${response.statusText}`);
-    }
+    const rawData = await response.json();
 
-    const data = await response.json();
-
-    console.log(`Weather in ${data.name}, ${data.sys.country}:`);
-    console.log(`Temperature: ${data.main.temp} °C`);
-    console.log(`Condition: ${data.weather[0].description}`);
-  } catch (error) {
-    console.error("Failed to get weather:", error.message);
-  } finally {
-    rl.close();
+    const provedData: WeatherResponse = WeatherSchema.parse(rawData);
+   console.log(`
+       City: ${provedData.name}
+      Condition: ${provedData?.weather[0]?.main} (${provedData?.weather[0]?.description})
+       Temperature: ${provedData.main.temp}°C (feels like ${provedData.main.feels_like}°C)
+       Min: ${provedData.main.temp_min}°C | 🔼 Max: ${provedData.main.temp_max}°C
+       Humidity: ${provedData.main.humidity}%
+       Wind: ${provedData.wind.speed} m/s from ${provedData.wind.deg}°
+       Cloud Cover: ${provedData.clouds.all}%
+      `);
+  } catch (err) {
+    console.log("oh no, something went wrong", err);
   }
-});
+};
+
+getCityWeather(city);
