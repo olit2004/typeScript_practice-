@@ -1,0 +1,159 @@
+import { z } from "zod";
+export declare const CoordinatesSchema: z.ZodObject<{
+    lon: z.ZodNumber;
+    lat: z.ZodNumber;
+}, z.core.$strip>;
+export declare const WeatherConditionSchema: z.ZodObject<{
+    id: z.ZodNumber;
+    main: z.ZodString;
+    description: z.ZodString;
+    icon: z.ZodString;
+}, z.core.$strip>;
+export declare const MainWeatherSchema: z.ZodObject<{
+    temp: z.ZodNumber;
+    feels_like: z.ZodNumber;
+    temp_min: z.ZodNumber;
+    temp_max: z.ZodNumber;
+    pressure: z.ZodNumber;
+    humidity: z.ZodNumber;
+    sea_level: z.ZodOptional<z.ZodNumber>;
+    grnd_level: z.ZodOptional<z.ZodNumber>;
+    temp_kf: z.ZodOptional<z.ZodNumber>;
+}, z.core.$strip>;
+export declare const WindSchema: z.ZodObject<{
+    speed: z.ZodNumber;
+    deg: z.ZodNumber;
+    gust: z.ZodOptional<z.ZodNumber>;
+}, z.core.$strip>;
+export declare const CloudsSchema: z.ZodObject<{
+    all: z.ZodNumber;
+}, z.core.$strip>;
+export declare const WeatherResponseSchema: z.ZodObject<{
+    coord: z.ZodObject<{
+        lon: z.ZodNumber;
+        lat: z.ZodNumber;
+    }, z.core.$strip>;
+    weather: z.ZodArray<z.ZodObject<{
+        id: z.ZodNumber;
+        main: z.ZodString;
+        description: z.ZodString;
+        icon: z.ZodString;
+    }, z.core.$strip>>;
+    main: z.ZodObject<{
+        temp: z.ZodNumber;
+        feels_like: z.ZodNumber;
+        temp_min: z.ZodNumber;
+        temp_max: z.ZodNumber;
+        pressure: z.ZodNumber;
+        humidity: z.ZodNumber;
+        sea_level: z.ZodOptional<z.ZodNumber>;
+        grnd_level: z.ZodOptional<z.ZodNumber>;
+        temp_kf: z.ZodOptional<z.ZodNumber>;
+    }, z.core.$strip>;
+    wind: z.ZodObject<{
+        speed: z.ZodNumber;
+        deg: z.ZodNumber;
+        gust: z.ZodOptional<z.ZodNumber>;
+    }, z.core.$strip>;
+    clouds: z.ZodObject<{
+        all: z.ZodNumber;
+    }, z.core.$strip>;
+    name: z.ZodString;
+    cod: z.ZodNumber;
+}, z.core.$strip>;
+export declare const ForecastItemSchema: z.ZodObject<{
+    dt: z.ZodNumber;
+    main: z.ZodObject<{
+        temp: z.ZodNumber;
+        feels_like: z.ZodNumber;
+        temp_min: z.ZodNumber;
+        temp_max: z.ZodNumber;
+        pressure: z.ZodNumber;
+        humidity: z.ZodNumber;
+        sea_level: z.ZodOptional<z.ZodNumber>;
+        grnd_level: z.ZodOptional<z.ZodNumber>;
+        temp_kf: z.ZodOptional<z.ZodNumber>;
+    }, z.core.$strip>;
+    weather: z.ZodArray<z.ZodObject<{
+        id: z.ZodNumber;
+        main: z.ZodString;
+        description: z.ZodString;
+        icon: z.ZodString;
+    }, z.core.$strip>>;
+    clouds: z.ZodObject<{
+        all: z.ZodNumber;
+    }, z.core.$strip>;
+    wind: z.ZodObject<{
+        speed: z.ZodNumber;
+        deg: z.ZodNumber;
+        gust: z.ZodOptional<z.ZodNumber>;
+    }, z.core.$strip>;
+    visibility: z.ZodNumber;
+    pop: z.ZodNumber;
+    rain: z.ZodOptional<z.ZodObject<{
+        "3h": z.ZodNumber;
+    }, z.core.$strip>>;
+    sys: z.ZodObject<{
+        pod: z.ZodString;
+    }, z.core.$strip>;
+    dt_txt: z.ZodString;
+}, z.core.$strip>;
+export declare const ForecastResponseSchema: z.ZodObject<{
+    cod: z.ZodString;
+    message: z.ZodNumber;
+    cnt: z.ZodNumber;
+    list: z.ZodArray<z.ZodObject<{
+        dt: z.ZodNumber;
+        main: z.ZodObject<{
+            temp: z.ZodNumber;
+            feels_like: z.ZodNumber;
+            temp_min: z.ZodNumber;
+            temp_max: z.ZodNumber;
+            pressure: z.ZodNumber;
+            humidity: z.ZodNumber;
+            sea_level: z.ZodOptional<z.ZodNumber>;
+            grnd_level: z.ZodOptional<z.ZodNumber>;
+            temp_kf: z.ZodOptional<z.ZodNumber>;
+        }, z.core.$strip>;
+        weather: z.ZodArray<z.ZodObject<{
+            id: z.ZodNumber;
+            main: z.ZodString;
+            description: z.ZodString;
+            icon: z.ZodString;
+        }, z.core.$strip>>;
+        clouds: z.ZodObject<{
+            all: z.ZodNumber;
+        }, z.core.$strip>;
+        wind: z.ZodObject<{
+            speed: z.ZodNumber;
+            deg: z.ZodNumber;
+            gust: z.ZodOptional<z.ZodNumber>;
+        }, z.core.$strip>;
+        visibility: z.ZodNumber;
+        pop: z.ZodNumber;
+        rain: z.ZodOptional<z.ZodObject<{
+            "3h": z.ZodNumber;
+        }, z.core.$strip>>;
+        sys: z.ZodObject<{
+            pod: z.ZodString;
+        }, z.core.$strip>;
+        dt_txt: z.ZodString;
+    }, z.core.$strip>>;
+    city: z.ZodOptional<z.ZodObject<{
+        id: z.ZodNumber;
+        name: z.ZodString;
+        coord: z.ZodObject<{
+            lon: z.ZodNumber;
+            lat: z.ZodNumber;
+        }, z.core.$strip>;
+        country: z.ZodString;
+        population: z.ZodNumber;
+        timezone: z.ZodNumber;
+        sunrise: z.ZodNumber;
+        sunset: z.ZodNumber;
+    }, z.core.$strip>>;
+}, z.core.$strip>;
+export type WeatherResponse = z.infer<typeof WeatherResponseSchema>;
+export type ForecastItem = z.infer<typeof ForecastItemSchema>;
+export type ForecastResponse = z.infer<typeof ForecastResponseSchema>;
+//# sourceMappingURL=weatherType%20.d.ts.map
