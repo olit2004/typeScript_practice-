@@ -1,0 +1,30 @@
+[
+    
+  { "word": "apple", "category": "fruit" },
+  { "word": "banana", "category": "fruit" },
+  { "word": "cherry", "category": "fruit" },
+  { "word": "orange", "category": "fruit" },
+  { "word": "grape", "category": "fruit" },
+  { "word": "elephant", "category": "animal" },
+  { "word": "tiger", "category": "animal" },
+  { "word": "giraffe", "category": "animal" },
+  { "word": "kangaroo", "category": "animal" },
+  { "word": "penguin", "category": "animal" },
+  { "word": "computer", "category": "technology" },
+  { "word": "keyboard", "category": "technology" },
+  { "word": "internet", "category": "technology" },
+  { "word": "software", "category": "technology" },
+  { "word": "browser", "category": "technology" },
+  { "word": "mountain", "category": "nature" },
+  { "word": "river", "category": "nature" },
+  { "word": "forest", "category": "nature" },
+  { "word": "desert", "category": "nature" },
+  { "word": "ocean", "category": "nature" },
+  { "word": "football", "category": "sport" },
+  { "word": "basketball", "category": "sport" },
+  { "word": "tennis", "category": "sport" },
+  { "word": "cricket", "category": "sport" },
+  { "word": "hockey", "category": "sport" }
+
+
+]
